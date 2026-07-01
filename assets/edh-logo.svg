@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <g fill="none" stroke="#f4d38a" stroke-width="8" stroke-linecap="round">
+    <line x1="95" y1="95" x2="405" y2="405"/>
+    <line x1="405" y1="95" x2="95" y2="405"/>
+  </g>
+
+  <g fill="#f4d38a" font-family="Arial, Helvetica, sans-serif" font-weight="700">
+    <text x="250" y="110" font-size="96" text-anchor="middle">D</text>
+    <text x="115" y="285" font-size="96" text-anchor="middle">E</text>
+    <text x="385" y="285" font-size="96" text-anchor="middle">H</text>
+    <text x="250" y="405" font-size="110" text-anchor="middle">∞</text>
+  </g>
+</svg>
