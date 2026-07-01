@@ -104,6 +104,44 @@ main{
 
     text-align:center;
 
+    min-height:38vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:relative;
+
+}
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:550px;
+
+    height:550px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(circle,
+        rgba(255,120,0,.18),
+        transparent 70%);
+
+    filter:blur(45px);
+
+    z-index:-1;
+
+    animation:fireGlow 6s ease-in-out infinite;
+
 }
 
 .logo{
@@ -156,6 +194,16 @@ main{
 
     line-height:.9;
 
+text-transform:uppercase;
+
+text-shadow:
+
+0 0 15px rgba(255,170,0,.35),
+
+0 0 45px rgba(255,120,0,.28),
+
+0 0 90px rgba(255,80,0,.15);
+
 }
 
 .hero span{
@@ -172,15 +220,22 @@ main{
 
 .subtitle{
 
-    margin-top:25px;
+margin-top:18px;
 
-    color:var(--light);
+font-size:1.35rem;
 
-    font-size:1.2rem;
+font-weight:500;
 
-    letter-spacing:2px;
+letter-spacing:4px;
 
-}/* ===========================
+color:#f0d4aa;
+
+text-transform:uppercase;
+
+opacity:.92;
+
+}
+/* ===========================
    Countdown
 =========================== */
 
@@ -725,4 +780,447 @@ footer p{
 
     letter-spacing:2px;
 
+}
+/* ===========================
+   PREMIUM COUNTDOWN UPGRADE
+=========================== */
+
+#countdown{
+    max-width:1050px;
+    gap:18px;
+}
+
+.time-box{
+    position:relative;
+    overflow:hidden;
+    border-radius:16px;
+    padding:38px 18px 28px;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.45)),
+        rgba(12,12,12,.72);
+    border:1px solid rgba(255,190,90,.28);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        inset 0 -35px 60px rgba(0,0,0,.45),
+        0 18px 55px rgba(0,0,0,.48),
+        0 0 30px rgba(255,125,0,.18);
+}
+
+.time-box::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+    transform:translateX(-120%);
+    animation:shine 5s ease-in-out infinite;
+}
+
+.time-box::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    top:50%;
+    height:1px;
+    background:rgba(255,210,140,.22);
+    box-shadow:0 0 12px rgba(255,120,0,.25);
+}
+
+.time-box span{
+    position:relative;
+    z-index:2;
+    font-family:'Bebas Neue', sans-serif;
+    font-size:clamp(3.4rem,7vw,6.3rem);
+    letter-spacing:3px;
+    color:#ffe0a1;
+    text-shadow:
+        0 0 8px rgba(255,210,120,.55),
+        0 0 24px rgba(255,130,0,.55),
+        0 0 55px rgba(255,100,0,.25);
+}
+
+.time-box small{
+    position:relative;
+    z-index:2;
+    color:#f3d6a0;
+    font-weight:700;
+}
+
+@keyframes shine{
+    0%, 65%{
+        transform:translateX(-120%);
+    }
+    100%{
+        transform:translateX(120%);
+    }
+}
+
+@keyframes fireGlow{
+
+0%{
+
+transform:scale(.9);
+
+opacity:.45;
+
+}
+
+50%{
+
+transform:scale(1.1);
+
+opacity:.85;
+
+}
+
+100%{
+
+transform:scale(.9);
+
+opacity:.45;
+
+}
+
+}
+/* ===========================
+   MILESTONE TIMELINE
+=========================== */
+
+.milestones{
+    position:relative;
+    width:min(850px, 92%);
+    margin:55px auto 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.milestone-line{
+    position:absolute;
+    left:0;
+    right:0;
+    top:26px;
+    height:3px;
+    background:rgba(255,255,255,.18);
+    z-index:0;
+}
+
+.milestone-line::before{
+    content:"";
+    display:block;
+    width:var(--milestone-progress, 0%);
+    height:100%;
+    background:linear-gradient(90deg, #ff7b00, #ffd36e);
+    box-shadow:0 0 18px rgba(255,140,0,.55);
+    transition:width .8s ease;
+}
+
+.milestone{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    color:#bdbdbd;
+    transition:.35s ease;
+}
+
+.milestone span{
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 10px;
+    background:rgba(20,20,20,.72);
+    border:1px solid rgba(255,255,255,.16);
+    box-shadow:0 0 18px rgba(0,0,0,.4);
+    font-size:1.4rem;
+}
+
+.milestone small{
+    display:block;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+}
+
+.milestone.active span{
+    border-color:rgba(255,210,120,.7);
+    background:rgba(255,135,20,.18);
+    box-shadow:
+        0 0 18px rgba(255,140,0,.55),
+        0 0 45px rgba(255,90,0,.22);
+    transform:scale(1.12);
+}
+
+.milestone.active{
+    color:#ffd36e;
+}
+
+@media(max-width:600px){
+    .milestones{
+        width:96%;
+        margin-top:45px;
+    }
+
+    .milestone span{
+        width:44px;
+        height:44px;
+        font-size:1.1rem;
+    }
+
+    .milestone small{
+        font-size:.65rem;
+    }
+
+    .milestone-line{
+        top:22px;
+    }
+}
+/* ===========================
+   ENDSPURT MODE
+=========================== */
+
+.endspurt-banner{
+    width:min(850px, 92%);
+    margin:45px auto -25px;
+    padding:16px 22px;
+    border-radius:999px;
+    text-align:center;
+    font-weight:900;
+    letter-spacing:3px;
+    color:#fff3cc;
+    background:rgba(255,120,0,.18);
+    border:1px solid rgba(255,210,120,.55);
+    box-shadow:
+        0 0 18px rgba(255,140,0,.5),
+        0 0 55px rgba(255,80,0,.25);
+    animation:endspurtPulse 1.7s ease-in-out infinite;
+}
+
+body.endspurt .time-box{
+    border-color:rgba(255,220,140,.75);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.18),
+        inset 0 -35px 60px rgba(0,0,0,.45),
+        0 18px 55px rgba(0,0,0,.48),
+        0 0 45px rgba(255,125,0,.45),
+        0 0 90px rgba(255,70,0,.22);
+}
+
+body.endspurt #progressBar{
+    animation:endspurtProgress 1.4s ease-in-out infinite;
+}
+
+body.endspurt .milestone span{
+    border-color:rgba(255,210,120,.75);
+    box-shadow:
+        0 0 18px rgba(255,140,0,.55),
+        0 0 45px rgba(255,90,0,.25);
+}
+
+@keyframes endspurtPulse{
+    0%,100%{
+        transform:scale(1);
+        opacity:.82;
+    }
+    50%{
+        transform:scale(1.035);
+        opacity:1;
+    }
+}
+
+@keyframes endspurtProgress{
+    0%,100%{
+        box-shadow:0 0 14px rgba(255,140,0,.45);
+    }
+    50%{
+        box-shadow:0 0 35px rgba(255,210,120,.9);
+    }
+}
+/* ===================================
+   CHALLENGE GESCHAFFT
+=================================== */
+
+.finished-card{
+
+    background:rgba(18,18,18,.72);
+
+    backdrop-filter:blur(16px);
+
+    border-radius:28px;
+
+    padding:70px;
+
+    border:1px solid rgba(255,200,120,.28);
+
+    box-shadow:
+
+        0 0 45px rgba(255,140,0,.28);
+
+    animation:finishedAppear 1s ease;
+
+}
+
+.finished-emoji{
+
+    font-size:6rem;
+
+    animation:beerBounce 2.2s ease infinite;
+
+}
+
+#finished h2{
+
+    margin-top:20px;
+
+    font-family:'Bebas Neue';
+
+    font-size:4.7rem;
+
+    letter-spacing:4px;
+
+    color:#ffd36e;
+
+}
+
+#finished p{
+
+    margin-top:25px;
+
+    line-height:1.8;
+
+    font-size:1.4rem;
+
+}
+
+#finished h3{
+
+    margin-top:35px;
+
+    color:#ff9d2d;
+
+    font-size:2rem;
+
+}
+
+@keyframes finishedAppear{
+
+    from{
+
+        transform:translateY(50px);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:translateY(0);
+
+        opacity:1;
+
+    }
+
+}
+
+@keyframes beerBounce{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-14px);
+
+    }
+
+}
+
+.confetti{
+
+position:fixed;
+
+top:-20px;
+
+width:10px;
+
+height:14px;
+
+pointer-events:none;
+
+animation:confettiFall linear forwards;
+
+z-index:9999;
+
+border-radius:2px;
+
+}
+
+@keyframes confettiFall{
+
+0%{
+
+transform:
+
+translateY(-40px)
+
+rotate(0deg);
+
+}
+
+100%{
+
+transform:
+
+translateY(110vh)
+
+rotate(900deg);
+
+}
+
+}
+/* ===========================
+   CHALLENGE JOURNAL
+=========================== */
+
+.journal{
+    width:min(780px, 92%);
+    margin:55px auto 0;
+    padding:34px 30px;
+    text-align:center;
+    border-radius:24px;
+    background:rgba(18,18,18,.58);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(255,200,120,.18);
+    box-shadow:
+        0 16px 50px rgba(0,0,0,.35),
+        0 0 28px rgba(255,120,0,.10);
+}
+
+.journal-kicker{
+    color:#ffb347;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    font-size:.8rem;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.journal h4{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:clamp(2rem, 4vw, 3rem);
+    letter-spacing:2px;
+    color:#ffd36e;
+    margin-bottom:10px;
+}
+
+.journal p:last-child{
+    color:#e4d6c2;
+    font-size:1.1rem;
+    line-height:1.7;
 }

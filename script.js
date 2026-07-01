@@ -3,7 +3,7 @@
    script.js
 ===================================================== */
 
-const TARGET_DATE = new Date("2026-07-31T10:00:00");
+const TARGET_DATE = new Date(   "2026-07-31T14:00:00");
 const START_DATE = new Date("2026-07-01T00:00:00");
 
 const daysEl = document.getElementById("days");
@@ -16,6 +16,9 @@ const progressText = document.getElementById("progressText");
 const motivation = document.getElementById("motivation");
 const finished = document.getElementById("finished");
 const main = document.querySelector("main");
+const journalTitle = document.getElementById("journalTitle");
+const journalText = document.getElementById("journalText");
+const endspurtBanner = document.getElementById("endspurtBanner");
 
 const quotes = [
   "Kein Bier. Keine Ausreden.",
@@ -66,16 +69,79 @@ function updateProgress(now) {
 
   progressBar.style.width = `${percent}%`;
   progressText.textContent = `${Math.floor(percent)} % geschafft`;
+  updateMilestones(percent);
+}
+function updateJournal(now) {
+  const dayMs = 1000 * 60 * 60 * 24;
+  const currentDay = Math.floor((now - START_DATE) / dayMs) + 1;
+
+  let title = "Challenge läuft";
+  let text = "Jeder Tag ohne Bier zählt.";
+
+  if (currentDay <= 1) {
+    title = "Tag 1";
+    text = "Heute beginnt die Challenge. Kein Bier. Ein Ziel.";
+  } else if (currentDay < 7) {
+    title = `Tag ${currentDay}`;
+    text = "Die ersten Tage sind geschafft. Jetzt wird Durchhalten zur Routine.";
+  } else if (currentDay === 7) {
+    title = "Eine Woche geschafft";
+    text = "Sieben Tage ohne Bier. Stark. Genau so weiter.";
+  } else if (currentDay < 14) {
+    title = `Tag ${currentDay}`;
+    text = "Die Challenge nimmt Fahrt auf. Das Festival rückt näher.";
+  } else if (currentDay === 14) {
+    title = "Zwei Wochen stark";
+    text = "Die Hälfte ist fast greifbar. Jetzt bloß nicht nachlassen.";
+  } else if (currentDay < 21) {
+    title = `Tag ${currentDay}`;
+    text = "Der schwierigste Teil liegt hinter euch. Der Countdown arbeitet für euch.";
+  } else if (currentDay === 21) {
+    title = "Drei Wochen geschafft";
+    text = "Das ist kein Versuch mehr. Das ist Disziplin.";
+  } else if (currentDay < 30) {
+    title = `Tag ${currentDay}`;
+    text = "Endspurt-Gefühl liegt in der Luft. Bald knistert das Lagerfeuer.";
+  } else if (currentDay === 30) {
+    title = "Morgen ist es soweit";
+    text = "Noch einmal schlafen. Der erste Schluck wartet schon.";
+  } else {
+    title = "Finaltag";
+    text = "Heute wird Geschichte geschrieben. Acoustic Campfire Festival wartet.";
+  }
+
+  journalTitle.textContent = title;
+  journalText.textContent = text;
+}
+function updateMilestones(percent) {
+  const milestones = document.querySelectorAll(".milestone");
+  milestones.forEach((milestone) => {
+    const targetPercent = parseFloat(milestone.dataset.percent);
+    if (percent >= targetPercent) {
+      milestone.classList.add("active");
+    } else {
+      milestone.classList.remove("active");
+    }
+  });
 }
 
-function showFinishedScreen() {
-  main.style.display = "none";
-  finished.classList.remove("hidden");
+function showFinishedScreen(){
+
+    document.body.classList.add("finished-mode");
+
+    main.style.display="none";
+
+    finished.classList.remove("hidden");
+
+    launchConfetti();
+
 }
+
 
 function updateCountdown() {
   const now = new Date();
   const diff = TARGET_DATE - now;
+  updateEndspurtMode(diff);
 
   if (diff <= 0) {
     showFinishedScreen();
@@ -94,6 +160,20 @@ function updateCountdown() {
 
   animateNumber(secondsEl);
   updateProgress(now);
+    updateJournal(now);
+
+}
+
+function updateEndspurtMode(diff) {
+  const oneDay = 1000 * 60 * 60 * 24;
+
+  if (diff > 0 && diff <= oneDay) {
+    document.body.classList.add("endspurt");
+    endspurtBanner.classList.remove("hidden");
+  } else {
+    document.body.classList.remove("endspurt");
+    endspurtBanner.classList.add("hidden");
+  }
 }
 
 /* =====================================================
@@ -186,3 +266,45 @@ setInterval(setRandomQuote, 20000);
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
+/* ===================================
+   CONFETTI
+=================================== */
+
+function launchConfetti(){
+
+    for(let i=0;i<220;i++){
+
+        setTimeout(()=>{
+
+            createConfetti();
+
+        },i*12);
+
+    }
+
+}
+
+function createConfetti(){
+
+    const piece=document.createElement("div");
+
+    piece.className="confetti";
+
+    piece.style.left=Math.random()*100+"vw";
+
+    piece.style.background=
+    ["#ff8c1a","#ffd36e","#ffffff","#ff4d00"][Math.floor(Math.random()*4)];
+
+    piece.style.animationDuration=
+    (3+Math.random()*3)+"s";
+
+    document.body.appendChild(piece);
+
+    setTimeout(()=>{
+
+        piece.remove();
+
+    },6000);
+
+}
