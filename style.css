@@ -1224,3 +1224,29 @@ rotate(900deg);
     font-size:1.1rem;
     line-height:1.7;
 }
+@media (max-width: 700px) {
+  .milestones {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    align-items: start;
+    width: 94%;
+  }
+
+  .milestone {
+    text-align: center;
+  }
+
+  .milestone span {
+    margin: 0 auto 8px;
+  }
+
+  .milestone-line {
+    display: none;
+  }
+
+  .journal {
+    margin-top: 45px;
+    width: 94%;
+  }
+}

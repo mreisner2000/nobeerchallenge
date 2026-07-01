@@ -160,7 +160,7 @@ function updateCountdown() {
 
   animateNumber(secondsEl);
   updateProgress(now);
-    updateJournal(now);
+  updateJournal(now);
 
 }
 
