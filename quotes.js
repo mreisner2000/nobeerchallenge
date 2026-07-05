@@ -1,7 +1,9 @@
 const player1 = "Markus";
 const player2 = "Theresa";
 
-const quotes = [
+const quoteCategories = {
+
+motivation: [
   "Kein Bier. Keine Ausreden.",
   "Legenden trinken später.",
   "Der erste Schluck wird legendär.",
@@ -129,4 +131,103 @@ const quotes = [
   "{player1}, dein Bier hat Geduld. Du auch.",
   "{player2}, das erste Festivalbier merkt sich diesen Einsatz.",
   "{player1} und {player2}: offiziell im Team 'Später Prost'."
-];
+],
+
+humor: [
+  "Dein Kühlschrank wirkt heute etwas enttäuscht.",
+  "Das Bier hat angerufen. Ich hab gesagt: später.",
+  "Heute bleibt der Bieröffner arbeitslos.",
+  "Wasser ist heute das offizielle Getränk der Champions.",
+  "Der Hopfen macht gerade Überstunden im Wartezimmer.",
+  "{player1}, bitte nicht mit dem Kühlschrank diskutieren.",
+  "{player2}, falls das Bier winkt: einfach ignorieren.",
+  "{player1} und {player2} wurden zuletzt nüchtern und entschlossen gesehen.",
+  "Der Durst hat heute keine Mehrheit.",
+  "Breaking News: Das Feierabendbier wurde erneut vertagt.",
+  "Der Kühlschrank übt sich in Geduld.",
+  "Heute gibt es Hopfen nur als Gedanke.",
+  "Bier? Heute nur als theoretisches Konzept.",
+  "Das Wasserglas hat sich extra hübsch gemacht.",
+  "Der Kronkorken bleibt heute im Ruhestand."
+],
+
+festival: [
+  "Das Lagerfeuer wartet schon.",
+  "Bald riecht es nach Rauch, Holz und verdientem Bier.",
+  "Jeder Tag bringt euch näher zum ersten Gitarrenakkord.",
+  "Das Festivalbier wird gerade mit Vorfreude gekühlt.",
+  "Acoustic Campfire rückt näher. Stark bleiben.",
+  "Bald knistert nicht nur das Feuer.",
+  "Der erste Schluck am Festival wird Geschichte.",
+  "Das Lagerfeuer zählt mit.",
+  "Nur noch ein paar Sonnenuntergänge bis Festivalmodus.",
+  "Der 31. Juli wartet nicht. Er kommt.",
+  "{player1} und {player2}: Bald wird aus Countdown Campfire.",
+  "Die Bühne steht noch nicht, aber die Vorfreude schon.",
+  "Noch nicht anstoßen. Erst am Feuer.",
+  "Das Festivalbier trainiert schon seinen Auftritt.",
+  "Das Ziel riecht nach Lagerfeuer."
+],
+
+weekend: [
+
+],
+
+golden: [
+  "⭐ Heute ist einer dieser Tage, an denen Durchhalten später richtig gut schmeckt.",
+  "⭐ Nicht jeder merkt, wie viel Disziplin in einem kleinen Nein steckt.",
+  "⭐ Das erste Bier am Festival bekommt gerade seine Vorgeschichte.",
+  "⭐ {player1} und {player2}, das ist mehr als eine Challenge. Das ist eine kleine Legende.",
+  "⭐ Wenn ihr das hier lest, seid ihr weiter gekommen als viele mit ihren Neujahrsvorsätzen.",
+  "⭐ Vorfreude ist gerade euer stärkstes Getränk.",
+  "⭐ Der beste Schluck ist der, auf den man gewartet hat.",
+  "⭐ Heute darf man kurz stolz sein.",
+  "⭐ Das Ziel ist nicht weit weg. Es wird nur gerade verdient.",
+  "⭐ Genau solche kleinen Siege bleiben hängen."
+],
+
+start: [
+  "Der Anfang zählt. Heute wird die Richtung gesetzt.",
+  "Ein guter Start ist die halbe Challenge.",
+  "Tag für Tag wird aus einer Idee ein Sieg.",
+  "Die ersten Tage entscheiden den Rhythmus.",
+  "Noch ist alles frisch. Genau jetzt wird Haltung aufgebaut.",
+  "{player1} und {player2}: Der Juli ist eröffnet.",
+  "Jetzt heißt es: nicht verhandeln, einfach starten.",
+  "Heute wird der Grundstein gelegt.",
+  "Das erste Nein zum Bier ist der Startschuss.",
+  "Noch klingt es leicht. Genau deshalb zählt es."
+],
+
+halftime: [
+  "Halbzeit rückt näher. Jetzt gibt es kein Zurück.",
+  "Die Mitte ist erreicht. Der Rest ist Kopfsache.",
+  "Jetzt seid ihr nicht mehr Anfänger, sondern Durchhalter.",
+  "Halbzeit-Energie: ruhig bleiben und weitermachen.",
+  "Der schwerste Teil ist oft der unspektakuläre. Ihr macht ihn gerade.",
+  "{player1} und {player2}: Das sieht inzwischen verdächtig nach Disziplin aus.",
+  "Jetzt ist die Challenge kein Versuch mehr.",
+  "Die Hälfte fühlt sich gut an. Das Ziel fühlt sich besser an.",
+  "Weitergehen. Genau jetzt zählt es.",
+  "Routine ist stärker als Durst."
+],
+
+endspurt: [
+  "Endspurt. Jetzt bloß nicht auf den letzten Metern stolpern.",
+  "Das Ziel steht quasi schon mit kaltem Bier bereit.",
+  "Noch wenige Tage. Das wird jetzt groß.",
+  "Der Kühlschrank zählt vermutlich schon mit.",
+  "Jetzt wird nicht mehr diskutiert. Jetzt wird fertiggemacht.",
+  "Die letzten Meter gehören euch.",
+  "{player1} und {player2}: Der finale Abschnitt läuft.",
+  "Das erste Bier ist schon in Sichtweite.",
+  "Jeder weitere Tag macht den Moment größer.",
+  "Der Countdown klingt jetzt anders.",
+  "Fast geschafft ist nicht geschafft. Weiter.",
+  "Noch ein bisschen Haltung, dann Lagerfeuer.",
+  "Bald wird aus Durchhalten Anstoßen.",
+  "Der 31. Juli steht schon in den Startlöchern.",
+  "Jetzt wird die Geschichte fertiggeschrieben."
+],
+};
+

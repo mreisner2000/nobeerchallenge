@@ -33,19 +33,78 @@ function personalize(text) {
     .replaceAll("{player2}", player2);
 }
 
-function setRandomQuote() {
-  let quote = quotes[Math.floor(Math.random() * quotes.length)];
-
-  let attempts = 0;
-
-  while (quote === lastQuote && attempts < 10) {
-    quote = quotes[Math.floor(Math.random() * quotes.length)];
-    attempts++;
-  }
-
-  lastQuote = quote;
-  motivation.textContent = personalize(quote);
+function getChallengeDay() {
+    const dayMs = 1000 * 60 * 60 * 24;
+    return Math.floor((new Date() - START_DATE) / dayMs) + 1;
 }
+
+function setRandomQuote() {
+
+    const now = new Date();
+    const hour = now.getHours();
+    const day = now.getDay();
+
+    let category = "motivation";
+    const challengeDay = getChallengeDay();
+
+if (challengeDay >= 25 && quoteCategories.endspurt?.length > 0) {
+    category = "endspurt";
+}
+else if (challengeDay >= 14 && challengeDay < 21 && quoteCategories.halftime?.length > 0) {
+    category = "halftime";
+}
+else if (challengeDay >= 1 && challengeDay <= 3 && quoteCategories.start?.length > 0) {
+    category = "start";
+}
+
+    // Freitag oder Samstag
+    if (day === 5 || day === 6) {
+
+        if (Math.random() < 0.35) {
+            category = "festival";
+        }
+        else if (Math.random() < 0.35) {
+            category = "humor";
+        }
+
+    }
+
+    // Abends öfter Humor
+    else if (hour >= 18) {
+
+        if (Math.random() < 0.40) {
+            category = "humor";
+        }
+
+    }
+
+    // Golden Message
+    if (Math.random() < 0.03) {
+        category = "golden";
+    }
+
+    let list = quoteCategories[category];
+
+    // Falls die Kategorie noch leer ist → Motivation verwenden
+    if (!list || list.length === 0) {
+        list = quoteCategories.motivation;
+    }
+
+    let quote = list[Math.floor(Math.random() * list.length)];
+
+    let attempts = 0;
+
+    while (quote === lastQuote && attempts < 10) {
+        quote = list[Math.floor(Math.random() * list.length)];
+        attempts++;
+    }
+
+    lastQuote = quote;
+
+    motivation.textContent = personalize(quote);
+
+}
+
 
 
 function animateNumber(element) {
