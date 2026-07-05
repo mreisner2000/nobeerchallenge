@@ -72,48 +72,83 @@ function updateProgress(now) {
   progressText.textContent = `${Math.floor(percent)} % geschafft`;
   updateMilestones(percent);
 }
+let lastJournal = "";
+let journalCacheTime = 0;
+const JOURNAL_REFRESH_TIME = 15 * 60 * 1000;
+
+
 function updateJournal(now) {
-  const dayMs = 1000 * 60 * 60 * 24;
-  const currentDay = Math.floor((now - START_DATE) / dayMs) + 1;
 
-  let title = "Challenge läuft";
-  let text = "Jeder Tag ohne Bier zählt.";
+    const currentTime = now.getTime();
 
-  if (currentDay <= 1) {
-    title = "Tag 1";
-    text = "Heute beginnt die Challenge. Kein Bier. Ein Ziel.";
-  } else if (currentDay < 7) {
-    title = `Tag ${currentDay}`;
-    text = "Die ersten Tage sind geschafft. Jetzt wird Durchhalten zur Routine.";
-  } else if (currentDay === 7) {
-    title = "Eine Woche geschafft";
-    text = "Sieben Tage ohne Bier. Stark. Genau so weiter.";
-  } else if (currentDay < 14) {
-    title = `Tag ${currentDay}`;
-    text = "Die Challenge nimmt Fahrt auf. Das Festival rückt näher.";
-  } else if (currentDay === 14) {
-    title = "Zwei Wochen stark";
-    text = "Die Hälfte ist fast greifbar. Jetzt bloß nicht nachlassen.";
-  } else if (currentDay < 21) {
-    title = `Tag ${currentDay}`;
-    text = "Der schwierigste Teil liegt hinter euch. Der Countdown arbeitet für euch.";
-  } else if (currentDay === 21) {
-    title = "Drei Wochen geschafft";
-    text = "Das ist kein Versuch mehr. Das ist Disziplin.";
-  } else if (currentDay < 30) {
-    title = `Tag ${currentDay}`;
-    text = "Endspurt-Gefühl liegt in der Luft. Bald knistert das Lagerfeuer.";
-  } else if (currentDay === 30) {
-    title = "Morgen ist es soweit";
-    text = "Noch einmal schlafen. Der erste Schluck wartet schon.";
-  } else {
-    title = "Finaltag";
-    text = "Heute wird Geschichte geschrieben. Acoustic Campfire Festival wartet.";
-  }
+    if (
+        lastJournal !== "" &&
+        currentTime - journalCacheTime < JOURNAL_REFRESH_TIME
+    ) {
+        return;
+    }
 
-  journalTitle.textContent = title;
-  journalText.textContent = text;
+    const dayMs = 1000 * 60 * 60 * 24;
+    let currentDay = Math.floor((now - START_DATE) / dayMs) + 1;
+
+    let category = "middle";
+    let title = `Tag ${currentDay}`;
+
+    if (now < START_DATE) {
+        category = "beforeStart";
+        title = "Challenge startet bald";
+    }
+    else if (currentDay <= 1) {
+        category = "start";
+        title = "Tag 1";
+    }
+    else if (currentDay < 7) {
+        category = "early";
+    }
+    else if (currentDay === 7) {
+        category = "weekOne";
+        title = "Eine Woche geschafft";
+    }
+    else if (currentDay < 21) {
+        category = "middle";
+    }
+    else if (currentDay < 30) {
+        category = "late";
+    }
+    else if (currentDay === 30) {
+        category = "endspurt";
+        title = "Morgen ist es soweit";
+    }
+    else {
+        category = "final";
+        title = "Finaltag";
+    }
+
+    if (Math.random() < 0.03) {
+        category = "golden";
+    }
+
+    if (Math.random() < 0.01) {
+        category = "easterEggs";
+        title = "🎉 Überraschung!";
+    }
+
+    const list = journalEntries[category];
+
+    let text = list[Math.floor(Math.random() * list.length)];
+
+    while (text === lastJournal && list.length > 1) {
+        text = list[Math.floor(Math.random() * list.length)];
+    }
+
+    lastJournal = text;
+    journalCacheTime = currentTime;
+
+    journalTitle.textContent = title;
+    journalText.textContent = personalize(text);
 }
+
+
 function updateMilestones(percent) {
   const milestones = document.querySelectorAll(".milestone");
   milestones.forEach((milestone) => {
@@ -267,6 +302,7 @@ setInterval(setRandomQuote, 20000);
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
 
 /* ===================================
    CONFETTI
