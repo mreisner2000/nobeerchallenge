@@ -20,32 +20,33 @@ const journalTitle = document.getElementById("journalTitle");
 const journalText = document.getElementById("journalText");
 const endspurtBanner = document.getElementById("endspurtBanner");
 
-const quotes = [
-  "Kein Bier. Keine Ausreden.",
-  "Legenden trinken später.",
-  "Der erste Schluck wird legendär.",
-  "Heute wieder gewonnen.",
-  "Disziplin schlägt Durst.",
-  "Jeder Tag bringt euch näher.",
-  "Gemeinsam bis zum Festival.",
-  "Nicht aufgeben.",
-  "Fast geschafft.",
-  "Der Grill wartet schon.",
-  "Das erste Bier schmeckt nur einmal.",
-  "No Beer. No Excuses.",
-  "Durchhalten zahlt sich aus.",
-  "Ihr seid stärker als das Feierabendbier.",
-  "Nur noch ein kleines Stück."
-];
 
 function pad(value) {
   return String(value).padStart(2, "0");
 }
 
-function setRandomQuote() {
-  const index = Math.floor(Math.random() * quotes.length);
-  motivation.textContent = quotes[index];
+let lastQuote = "";
+
+function personalize(text) {
+  return text
+    .replaceAll("{player1}", player1)
+    .replaceAll("{player2}", player2);
 }
+
+function setRandomQuote() {
+  let quote = quotes[Math.floor(Math.random() * quotes.length)];
+
+  let attempts = 0;
+
+  while (quote === lastQuote && attempts < 10) {
+    quote = quotes[Math.floor(Math.random() * quotes.length)];
+    attempts++;
+  }
+
+  lastQuote = quote;
+  motivation.textContent = personalize(quote);
+}
+
 
 function animateNumber(element) {
   element.animate(
