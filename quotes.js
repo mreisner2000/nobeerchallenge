@@ -1,5 +1,5 @@
-const player1 = "Markus";
-const player2 = "Theresa";
+const player1 = CONFIG.player1;
+const player2 = CONFIG.player2;
 
 const quoteCategories = {
 

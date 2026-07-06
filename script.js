@@ -3,8 +3,8 @@
    script.js
 ===================================================== */
 
-const TARGET_DATE = new Date(   "2026-07-31T14:00:00");
-const START_DATE = new Date("2026-07-01T00:00:00");
+const TARGET_DATE = CONFIG.targetDate;
+const START_DATE = CONFIG.startDate;
 
 const daysEl = document.getElementById("days");
 const hoursEl = document.getElementById("hours");
@@ -179,10 +179,11 @@ function updateProgress(now) {
   progressBar.style.width = `${percent}%`;
   progressText.textContent = `${Math.floor(percent)} % geschafft`;
   updateMilestones(percent);
+  updateCampfireMode(percent);
 }
 let lastJournal = "";
 let journalCacheTime = 0;
-const JOURNAL_REFRESH_TIME = 15 * 60 * 1000;
+const JOURNAL_REFRESH_TIME = CONFIG.journalRefreshTime;
 
 
 function updateJournal(now) {
@@ -452,5 +453,29 @@ function createConfetti(){
         piece.remove();
 
     },6000);
+
+}
+
+function updateCampfireMode(percent) {
+
+    document.body.classList.remove(
+        "week1",
+        "week2",
+        "week3",
+        "week4"
+    );
+
+    if (percent >= 75) {
+        document.body.classList.add("week4");
+    }
+    else if (percent >= 50) {
+        document.body.classList.add("week3");
+    }
+    else if (percent >= 25) {
+        document.body.classList.add("week2");
+    }
+    else {
+        document.body.classList.add("week1");
+    }
 
 }

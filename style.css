@@ -1310,3 +1310,35 @@ rotate(900deg);
         transform: translateY(-18px);
     }
 }
+
+/* ===========================
+   CAMPFIRE MODE
+=========================== */
+
+.background{
+    transition: filter 2s ease;
+}
+
+.week1 .background{
+    filter:
+        brightness(0.95)
+        saturate(0.95);
+}
+
+.week2 .background{
+    filter:
+        brightness(1)
+        saturate(1.05);
+}
+
+.week3 .background{
+    filter:
+        brightness(1.06)
+        saturate(1.10);
+}
+
+.week4 .background{
+    filter:
+        brightness(1.12)
+        saturate(1.18);
+}
