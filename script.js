@@ -54,6 +54,7 @@ function setRandomQuote() {
   const hour = now.getHours();
   const day = now.getDay();
   const challengeDay = getChallengeDay();
+  const story = getStory(challengeDay);
 
 let category = "motivation";
 
@@ -66,6 +67,10 @@ else if (challengeDay >= 14 && challengeDay < 21 && quoteCategories.halftime?.le
 }
 else if (challengeDay >= 1 && challengeDay <= 3 && quoteCategories.start?.length > 0) {
     category = "start";
+}
+
+if (story?.quote && quoteCategories[story.quote]?.length > 0) {
+    category = story.quote;
 }
 
 // Wochenende
