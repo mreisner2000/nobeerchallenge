@@ -18,6 +18,8 @@ function getChallengeDay() {
     return Math.floor((new Date() - CONFIG.startDate) / dayMs) + 1;
 }
 
+
+
 function showAchievement(text) {
     const achievementToast = document.getElementById("achievementToast");
     const achievementText = document.getElementById("achievementText");
@@ -54,6 +56,7 @@ function checkAchievements() {
 
     if (!localStorage.getItem(storyAchievementKey)) {
         localStorage.setItem(storyAchievementKey, "shown");
+        window.achievementShownOnLoad = true;
         showAchievement(story.achievement);
     }
 }
@@ -64,6 +67,7 @@ function checkAchievements() {
 
             if (!localStorage.getItem(storageKey)) {
                 localStorage.setItem(storageKey, "shown");
+                window.achievementShownOnLoad = true;
                 showAchievement(achievement.text);
             }
         }

@@ -1369,3 +1369,48 @@ body.heartbeat .background {
         brightness(1.18)
         saturate(1.22);
 }
+
+/* ===========================
+   AMBIENT MESSAGE
+=========================== */
+
+.ambient-message {
+    margin: 18px auto 6px;
+    text-align: center;
+    font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+    font-weight: 500;
+    letter-spacing: 1.6px;
+    color: rgba(255, 215, 140, 0.85);
+    opacity: 0;
+    transform: translateY(-10px);
+    text-shadow:
+        0 0 8px rgba(255,180,70,.35),
+        0 0 22px rgba(255,120,0,.14);
+    pointer-events: none;
+}
+
+.ambient-message.show {
+    animation: ambientInOut 5.5s ease forwards;
+}
+
+@keyframes ambientInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    18% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    78% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}

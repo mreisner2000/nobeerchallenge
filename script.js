@@ -378,6 +378,7 @@ updateCountdown();
 setInterval(updateCountdown, 1000);
 
 checkAchievements();
+runCampfireMoment();
 
 /* ===================================
    CONFETTI
@@ -420,4 +421,5 @@ function createConfetti(){
     },6000);
 
 }
+
 
