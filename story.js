@@ -1,25 +1,91 @@
 const STORY = {
+    1: {
+        event: "start",
+        title: "Tag 1",
+        journal: "start",
+        quote: "start",
+        mood: "hopeful"
+    },
 
-    1: { event: "start" },
+    3: {
+        event: "routine",
+        title: "Tag 3",
+        journal: "early",
+        quote: "start",
+        mood: "focused"
+    },
 
-    3: { event: "routine" },
+    7: {
+        event: "first_week",
+        title: "Eine Woche geschafft",
+        journal: "weekOne",
+        quote: "motivation",
+        achievement: "Erste Woche geschafft",
+        mood: "proud"
+    },
 
-    7: { event: "first_week" },
+    10: {
+        event: "double_digits",
+        title: "Zweistellig",
+        journal: "middle",
+        quote: "motivation",
+        mood: "strong"
+    },
 
-    10: { event: "double_digits" },
+    14: {
+        event: "halfway",
+        title: "Halbzeit voraus",
+        journal: "middle",
+        quote: "halftime",
+        mood: "determined"
+    },
 
-    14: { event: "halfway" },
+    15: {
+        event: "mid_challenge_surprise",
+        title: "Tag 15",
+        journal: "midChallengeSurprise",
+        quote: "halftime",
+        mood: "serious"
+    },
 
-    21: { event: "three_weeks" },
+    21: {
+        event: "three_weeks",
+        title: "Drei Wochen geschafft",
+        journal: "late",
+        quote: "motivation",
+        mood: "proud"
+    },
 
-    28: { event: "endspurt" },
+    28: {
+        event: "endspurt",
+        title: "Endspurt erreicht",
+        journal: "endspurt",
+        quote: "endspurt",
+        mood: "intense"
+    },
 
-    30: { event: "almost_there" },
+    30: {
+        event: "almost_there",
+        title: "Morgen ist es soweit",
+        journal: "endspurt",
+        quote: "endspurt",
+        mood: "electric"
+    },
 
-    31: { event: "victory" }
-
+    31: {
+        event: "victory",
+        title: "Finaltag",
+        journal: "final",
+        quote: "festival",
+        achievement: "Mission erfolgreich",
+        mood: "victory"
+    }
 };
 
+function getStory(day) {
+    return STORY[day] || null;
+}
+
 function getStoryEvent(day) {
-    return STORY[day]?.event || null;
+    return getStory(day)?.event || null;
 }

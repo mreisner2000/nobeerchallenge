@@ -151,6 +151,7 @@ function updateJournal(now) {
     const dayMs = 1000 * 60 * 60 * 24;
     let currentDay = Math.floor((now - START_DATE) / dayMs) + 1;
 const storyEvent = getStoryEvent(currentDay);
+const story = getStory(currentDay);
     let category = "middle";
     let title = `Tag ${currentDay}`;
 
@@ -183,6 +184,14 @@ const storyEvent = getStoryEvent(currentDay);
         category = "final";
         title = "Finaltag";
     }
+
+if (story?.journal) {
+    category = story.journal;
+}
+
+if (story?.title) {
+    title = story.title;
+}
 
     if (Math.random() < CONFIG.probabilities.journal.golden) {
     category = "golden";

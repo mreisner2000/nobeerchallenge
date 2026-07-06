@@ -188,6 +188,14 @@ const journalEntries = {
 
   ],
 
+midChallengeSurprise: [
+  "Heute ist der Tag, an dem viele sagen würden: 'Ach, eines geht schon.' Markus und Theresa sagen: Nein. Genau deshalb funktioniert diese Challenge.",
+  "Tag 15 ist kein glamouröser Tag. Er ist besser: Er ist ehrlich. Heute zeigt sich, wer wirklich durchzieht.",
+  "Halbzeitnähe. Müdigkeit. Gewohnheit. Versuchung. Und trotzdem bleibt das Bier zu. Stark.",
+  "Wenn die erste Euphorie weg ist, beginnt der echte Teil. Willkommen im echten Teil.",
+  "Heute zählt nicht Motivation. Heute zählt Entscheidung. Und die habt ihr schon getroffen."
+],
+
   golden: [
 
     "⭐ Wenn ihr das gerade lest, seid ihr weiter gekommen als viele Menschen mit ihren Neujahrsvorsätzen.",
