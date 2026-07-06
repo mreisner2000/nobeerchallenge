@@ -10,11 +10,42 @@ const CONFIG = {
 
     journalRefreshTime: 15 * 60 * 1000,
 
-    probabilities: {
-        golden: 0.08,
-        easterEgg: 0.04,
-        personal: 0.12,
+   probabilities: {
+
+    journal: {
+        golden: 0.03,
+        easterEgg: 0.01
+    },
+
+    quotes: {
         humor: 0.25,
-        festival: 0.20
+        festival: 0.20,
+        personal: 0.12,
+        golden: 0.08
     }
+
+},
+
+timing: {
+
+    achievementDuration: 6200,
+
+    quoteRefreshMinutes: 15,
+
+    heartbeatInterval: 15000
+
+},
+
+effects: {
+
+    achievements: true,
+
+    heartbeat: true,
+
+    confetti: true,
+
+    campfireMode: true
+
+},
+
 };

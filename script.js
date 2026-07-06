@@ -35,52 +35,12 @@ function personalize(text) {
     .replaceAll("{player2}", player2);
 }
 
-const achievements = [
-    { day: 1, id: "day-1", text: "Der erste Schritt" },
-    { day: 3, id: "day-3", text: "Die Routine beginnt" },
-    { day: 7, id: "day-7", text: "Erste Woche geschafft" },
-    { day: 10, id: "day-10", text: "Zweistellig" },
-    { day: 14, id: "day-14", text: "Halbzeit voraus" },
-    { day: 21, id: "day-21", text: "Drei Wochen Disziplin" },
-    { day: 28, id: "day-28", text: "Endspurt erreicht" },
-    { day: 30, id: "day-30", text: "Nur noch einmal schlafen" }
-];
 
 function getChallengeDay() {
     const dayMs = 1000 * 60 * 60 * 24;
     return Math.floor((new Date() - START_DATE) / dayMs) + 1;
 }
 
-function showAchievement(text) {
-    achievementText.textContent = text;
-
-    achievementToast.classList.remove("hidden");
-    achievementToast.classList.remove("show");
-
-    void achievementToast.offsetWidth;
-
-    achievementToast.classList.add("show");
-
-    setTimeout(() => {
-        achievementToast.classList.add("hidden");
-        achievementToast.classList.remove("show");
-    }, 6200);
-}
-
-function checkAchievements() {
-    const currentDay = getChallengeDay();
-
-    achievements.forEach((achievement) => {
-        if (currentDay >= achievement.day) {
-            const storageKey = `achievement-${achievement.id}`;
-
-            if (!localStorage.getItem(storageKey)) {
-                localStorage.setItem(storageKey, "shown");
-                showAchievement(achievement.text);
-            }
-        }
-    });
-}
 
 function getChallengeDay() {
     const dayMs = 1000 * 60 * 60 * 24;
@@ -89,13 +49,15 @@ function getChallengeDay() {
 
 function setRandomQuote() {
 
-    const now = new Date();
-    const hour = now.getHours();
-    const day = now.getDay();
 
-    let category = "motivation";
-    const challengeDay = getChallengeDay();
+  const now = new Date();
+  const hour = now.getHours();
+  const day = now.getDay();
+  const challengeDay = getChallengeDay();
 
+let category = "motivation";
+
+// Challenge-Phasen
 if (challengeDay >= 25 && quoteCategories.endspurt?.length > 0) {
     category = "endspurt";
 }
@@ -106,31 +68,20 @@ else if (challengeDay >= 1 && challengeDay <= 3 && quoteCategories.start?.length
     category = "start";
 }
 
-    // Freitag oder Samstag
-    if (day === 5 || day === 6) {
+// Wochenende
+if ((day === 5 || day === 6) && Math.random() < CONFIG.probabilities.quotes.festival) {
+    category = "festival";
+}
 
-        if (Math.random() < 0.35) {
-            category = "festival";
-        }
-        else if (Math.random() < 0.35) {
-            category = "humor";
-        }
+// Abend-Humor
+if (hour >= 18 && Math.random() < CONFIG.probabilities.quotes.humor) {
+    category = "humor";
+}
 
-    }
-
-    // Abends öfter Humor
-    else if (hour >= 18) {
-
-        if (Math.random() < 0.40) {
-            category = "humor";
-        }
-
-    }
-
-    // Golden Message
-    if (Math.random() < 0.03) {
-        category = "golden";
-    }
+// Golden Message
+if (Math.random() < CONFIG.probabilities.quotes.golden) {
+    category = "golden";
+}
 
     let list = quoteCategories[category];
 
@@ -233,14 +184,14 @@ function updateJournal(now) {
         title = "Finaltag";
     }
 
-    if (Math.random() < 0.03) {
-        category = "golden";
-    }
+    if (Math.random() < CONFIG.probabilities.journal.golden) {
+    category = "golden";
+}
 
-    if (Math.random() < 0.01) {
-        category = "easterEggs";
-        title = "🎉 Überraschung!";
-    }
+if (Math.random() < CONFIG.probabilities.journal.easterEgg) {
+    category = "easterEggs";
+    title = "🎉 Überraschung!";
+}
 
     const list = journalEntries[category];
 
