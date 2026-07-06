@@ -150,7 +150,7 @@ function updateJournal(now) {
 
     const dayMs = 1000 * 60 * 60 * 24;
     let currentDay = Math.floor((now - START_DATE) / dayMs) + 1;
-
+const storyEvent = getStoryEvent(currentDay);
     let category = "middle";
     let title = `Tag ${currentDay}`;
 
