@@ -43,6 +43,16 @@ function checkAchievements() {
     }
 
     const currentDay = getChallengeDay();
+    const story = getStory(currentDay);
+
+    if (story?.achievement) {
+    const storyAchievementKey = `achievement-story-${story.event}`;
+
+    if (!localStorage.getItem(storyAchievementKey)) {
+        localStorage.setItem(storyAchievementKey, "shown");
+        showAchievement(story.achievement);
+    }
+}
 
     achievements.forEach((achievement) => {
         if (currentDay >= achievement.day) {
