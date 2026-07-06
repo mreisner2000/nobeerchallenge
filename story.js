@@ -83,7 +83,27 @@ const STORY = {
 };
 
 function getStory(day) {
+    const forcedStory = getForcedStory();
+
+    if (forcedStory) {
+        return forcedStory;
+    }
+
     return STORY[day] || null;
+}
+
+function getForcedStory() {
+    if (!CONFIG.developer.enabled) {
+        return null;
+    }
+
+    if (!CONFIG.developer.forceStoryEvent) {
+        return null;
+    }
+
+    return Object.values(STORY).find(
+        (story) => story.event === CONFIG.developer.forceStoryEvent
+    ) || null;
 }
 
 function getStoryEvent(day) {

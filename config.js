@@ -48,4 +48,9 @@ effects: {
 
 },
 
+developer: {
+    enabled: false,
+    forceChallengeDay: null,
+    forceStoryEvent: null
+}
 };

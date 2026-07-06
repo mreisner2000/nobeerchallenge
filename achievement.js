@@ -10,6 +10,10 @@ const achievements = [
 ];
 
 function getChallengeDay() {
+    if (CONFIG.developer.enabled && CONFIG.developer.forceChallengeDay) {
+        return CONFIG.developer.forceChallengeDay;
+    }
+
     const dayMs = 1000 * 60 * 60 * 24;
     return Math.floor((new Date() - CONFIG.startDate) / dayMs) + 1;
 }
