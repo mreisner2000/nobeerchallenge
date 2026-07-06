@@ -1250,3 +1250,63 @@ rotate(900deg);
     width: 94%;
   }
 }
+
+/* ===========================
+   ACHIEVEMENT TOAST
+=========================== */
+
+.achievement-toast {
+    margin: 28px auto -18px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(-18px);
+    pointer-events: none;
+}
+
+.achievement-toast.show {
+    animation: achievementInOut 6s ease forwards;
+}
+
+.achievement-kicker {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 900;
+    color: #ffd36e;
+    text-shadow:
+        0 0 12px rgba(255, 180, 70, .65),
+        0 0 32px rgba(255, 120, 0, .3);
+}
+
+.achievement-text {
+    margin-top: 8px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.7rem, 4vw, 3rem);
+    letter-spacing: 2px;
+    color: #ffffff;
+    text-shadow:
+        0 0 14px rgba(255, 210, 120, .45),
+        0 0 38px rgba(255, 120, 0, .25);
+}
+
+@keyframes achievementInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(-18px);
+    }
+
+    15% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    82% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-18px);
+    }
+}

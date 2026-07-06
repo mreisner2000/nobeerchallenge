@@ -20,6 +20,8 @@ const journalTitle = document.getElementById("journalTitle");
 const journalText = document.getElementById("journalText");
 const endspurtBanner = document.getElementById("endspurtBanner");
 
+const achievementToast = document.getElementById("achievementToast");
+const achievementText = document.getElementById("achievementText");
 
 function pad(value) {
   return String(value).padStart(2, "0");
@@ -31,6 +33,53 @@ function personalize(text) {
   return text
     .replaceAll("{player1}", player1)
     .replaceAll("{player2}", player2);
+}
+
+const achievements = [
+    { day: 1, id: "day-1", text: "Der erste Schritt" },
+    { day: 3, id: "day-3", text: "Die Routine beginnt" },
+    { day: 7, id: "day-7", text: "Erste Woche geschafft" },
+    { day: 10, id: "day-10", text: "Zweistellig" },
+    { day: 14, id: "day-14", text: "Halbzeit voraus" },
+    { day: 21, id: "day-21", text: "Drei Wochen Disziplin" },
+    { day: 28, id: "day-28", text: "Endspurt erreicht" },
+    { day: 30, id: "day-30", text: "Nur noch einmal schlafen" }
+];
+
+function getChallengeDay() {
+    const dayMs = 1000 * 60 * 60 * 24;
+    return Math.floor((new Date() - START_DATE) / dayMs) + 1;
+}
+
+function showAchievement(text) {
+    achievementText.textContent = text;
+
+    achievementToast.classList.remove("hidden");
+    achievementToast.classList.remove("show");
+
+    void achievementToast.offsetWidth;
+
+    achievementToast.classList.add("show");
+
+    setTimeout(() => {
+        achievementToast.classList.add("hidden");
+        achievementToast.classList.remove("show");
+    }, 6200);
+}
+
+function checkAchievements() {
+    const currentDay = getChallengeDay();
+
+    achievements.forEach((achievement) => {
+        if (currentDay >= achievement.day) {
+            const storageKey = `achievement-${achievement.id}`;
+
+            if (!localStorage.getItem(storageKey)) {
+                localStorage.setItem(storageKey, "shown");
+                showAchievement(achievement.text);
+            }
+        }
+    });
 }
 
 function getChallengeDay() {
@@ -362,6 +411,7 @@ setInterval(setRandomQuote, 20000);
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
+checkAchievements();
 
 /* ===================================
    CONFETTI
