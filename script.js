@@ -377,8 +377,7 @@ setInterval(setRandomQuote, 20000);
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-checkAchievements();
-runCampfireMoment();
+runStartupSequence();
 
 /* ===================================
    CONFETTI

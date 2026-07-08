@@ -43,33 +43,43 @@ function showAchievement(text) {
     }, CONFIG.timing.achievementDuration);
 }
 
-function checkAchievements() {
-    if (!CONFIG.effects.achievements) {
-        return;
-    }
+function getPendingAchievement() {
+  if (!CONFIG.effects.achievements) {
+    return null;
+  }
 
-    const currentDay = getChallengeDay();
-    const story = getStory(currentDay);
+  const currentDay = getChallengeDay();
+  const story = getStory(currentDay);
 
-    if (story?.achievement) {
+  if (story?.achievement) {
     const storyAchievementKey = `achievement-story-${story.event}`;
 
     if (!localStorage.getItem(storyAchievementKey)) {
-        localStorage.setItem(storyAchievementKey, "shown");
-        window.achievementShownOnLoad = true;
-        showAchievement(story.achievement);
+      return {
+        text: story.achievement,
+        key: storyAchievementKey
+      };
     }
+  }
+
+  return achievements.find((achievement) => {
+    const storageKey = `achievement-${achievement.id}`;
+
+    return currentDay >= achievement.day && !localStorage.getItem(storageKey);
+  }) || null;
 }
 
-    achievements.forEach((achievement) => {
-        if (currentDay >= achievement.day) {
-            const storageKey = `achievement-${achievement.id}`;
 
-            if (!localStorage.getItem(storageKey)) {
-                localStorage.setItem(storageKey, "shown");
-                window.achievementShownOnLoad = true;
-                showAchievement(achievement.text);
-            }
-        }
-    });
+function tryShowAchievement() {
+  const achievement = getPendingAchievement();
+
+  if (!achievement) {
+    return false;
+  }
+
+  localStorage.setItem(achievement.key, "shown");
+  showAchievement(achievement.text);
+
+  return true;
 }
+

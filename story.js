@@ -109,3 +109,18 @@ function getForcedStory() {
 function getStoryEvent(day) {
     return getStory(day)?.event || null;
 }
+
+function tryShowStoryEvent() {
+  const context = getDateContext();
+  const story = getStory(context.day);
+
+  if (!story) {
+    return false;
+  }
+
+  if (typeof addJournalEntry === "function") {
+    addJournalEntry(story.journal, "story");
+  }
+
+  return true;
+}

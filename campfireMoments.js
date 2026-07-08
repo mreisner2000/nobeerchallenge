@@ -76,17 +76,16 @@ function showCampfireMoment(text) {
 }
 
 function runCampfireMoment() {
-if (window.achievementShownOnLoad) {
-    return;
-}
-    console.log("Campfire gestartet");
-
     const moment = getCampfireMoment();
 
-    console.log(moment);
-
-    if (moment) {
-        showCampfireMoment(moment);
+    if (!moment) {
+        return false;
     }
 
+    showCampfireMoment(moment);
+    return true;
+}
+
+function tryShowCampfireMoment() {
+    return runCampfireMoment();
 }
