@@ -3,12 +3,15 @@
 // Central orchestration for initial page events
 // =====================================================
 
+
 function runStartupSequence() {
-  const startupSteps = [
+ const startupSteps = [
+    tryShowFinaleExperience,
+    tryShowFinal24Hours,
     tryShowStoryEvent,
     tryShowAchievement,
     tryShowCampfireMoment
-  ];
+];
 
   for (const step of startupSteps) {
     if (typeof step === "function" && step()) {

@@ -18,7 +18,6 @@ const finished = document.getElementById("finished");
 const main = document.querySelector("main");
 const journalTitle = document.getElementById("journalTitle");
 const journalText = document.getElementById("journalText");
-const endspurtBanner = document.getElementById("endspurtBanner");
 
 const achievementToast = document.getElementById("achievementToast");
 const achievementText = document.getElementById("achievementText");
@@ -251,7 +250,7 @@ function showFinishedScreen(){
 function updateCountdown() {
   const now = new Date();
   const diff = TARGET_DATE - now;
-  updateEndspurtMode(diff);
+  
 
   if (diff <= 0) {
     showFinishedScreen();
@@ -274,17 +273,6 @@ function updateCountdown() {
 
 }
 
-function updateEndspurtMode(diff) {
-  const oneDay = 1000 * 60 * 60 * 24;
-
-  if (diff > 0 && diff <= oneDay) {
-    document.body.classList.add("endspurt");
-    endspurtBanner.classList.remove("hidden");
-  } else {
-    document.body.classList.remove("endspurt");
-    endspurtBanner.classList.add("hidden");
-  }
-}
 
 /* =====================================================
    FIRE PARTICLES
