@@ -1487,8 +1487,7 @@ body.final-24-active .time-box {
 
 .finished-card {
     width: min(760px, 92vw);
-    max-height: 88vh;
-    overflow-y: auto;
+    
 
     padding: clamp(30px, 5vw, 54px);
 
@@ -1625,42 +1624,66 @@ body.final-24-active .time-box {
 
 @media (max-width: 700px) {
     #finished {
-        padding: 16px;
-        align-items: flex-start;
+        box-sizing: border-box;
+
+        display: block;
+        overflow-x: hidden;
         overflow-y: auto;
+
+        padding:
+            calc(20px + env(safe-area-inset-top))
+            12px
+            calc(28px + env(safe-area-inset-bottom));
     }
 
     .finished-card {
+        box-sizing: border-box;
+
         width: 100%;
+        max-width: 420px;
         max-height: none;
+        overflow: visible;
 
-        margin: 24px 0;
-
-        padding: 32px 18px;
+        margin: 0 auto;
+        padding: 38px 14px 30px;
 
         border-radius: 22px;
     }
 
     .finished-card h2 {
-        font-size: clamp(2rem, 11vw, 3rem);
+        font-size: clamp(2.2rem, 12vw, 3.15rem);
+        line-height: 1.02;
+    }
+
+    .finished-subtitle {
+        margin: 26px 0 30px;
     }
 
     .final-stats {
+        width: 100%;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
+        gap: 9px;
     }
 
     .final-stat {
-        padding: 20px 8px;
+        min-width: 0;
+        padding: 18px 4px;
     }
 
     .final-stat span {
-        font-size: clamp(1.8rem, 11vw, 2.8rem);
+        font-size: clamp(1.75rem, 9vw, 2.35rem);
+        letter-spacing: -0.02em;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .final-stat:nth-child(3) span,
+    .final-stat:nth-child(4) span {
+        font-size: clamp(1.25rem, 6.4vw, 1.7rem);
     }
 
     .final-stat small {
-        font-size: 0.62rem;
-        letter-spacing: 0.14em;
+        font-size: 0.56rem;
+        letter-spacing: 0.12em;
     }
 }
 
@@ -2066,39 +2089,9 @@ body.final-24-active .time-box {
     transform: translateY(-5px);
 }
 
-.final-signature {
-    position: absolute;
-    z-index: 30;
 
-    left: 50%;
-    bottom: calc(2.5% + 6px);
 
-    width: 64px;
-    height: 64px;
 
-    transform: translateX(-50%);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    pointer-events: none;
-}
-
-#finalWishStar {
-    position: absolute;
-
-    width: 4px;
-    height: 4px;
-
-    border-radius: 50%;
-    background: rgba(255, 242, 205, 0.98);
-
-    opacity: 0;
-    transform: scale(0.35);
-
-    pointer-events: none;
-}
 
 #finalWishStar.glow {
     animation: finalWishStarGlow 3.4s ease-in-out forwards;
@@ -2142,34 +2135,67 @@ body.final-24-active .time-box {
     }
 }
 
+
+
+.final-signature {
+    position: absolute;
+    z-index: 30;
+
+    left: 50%;
+    bottom: calc(2.5% + 6px);
+
+    width: 72px;
+    height: 76px;
+
+    transform: translateX(-50%);
+
+    pointer-events: none;
+}
+
+#finalWishStar {
+    position: absolute;
+
+    top: 0;
+    left: calc(50% - 2px);
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+    background: rgba(255, 242, 205, 0.98);
+
+    opacity: 0;
+    transform: scale(0.35);
+
+    pointer-events: none;
+}
+
+#finalWishStar.glow {
+    animation: finalWishStarGlow 3.4s ease-in-out forwards;
+}
+
 #finalEdhLogo {
     position: absolute;
 
-    width: 56px;
+    left: 50%;
+    bottom: 0;
+
+    width: 54px;
     height: auto;
 
     opacity: 0;
-    transform: scale(0.88);
+    transform: translate(-50%, 5px);
 
-    filter:
-        brightness(1.2)
-        drop-shadow(0 0 0 rgba(255, 225, 170, 0));
+    transition:
+        opacity 2.2s ease,
+        transform 2.2s ease;
 
     pointer-events: none;
 }
 
 #finalEdhLogo.show {
     opacity: 0.9;
-    transform: scale(1);
-
-    filter:
-        brightness(1.2)
-        drop-shadow(0 0 8px rgba(255, 225, 170, 0.42));
-
-    transition:
-        opacity 2.4s ease,
-        transform 2.8s cubic-bezier(0.22, 1, 0.36, 1),
-        filter 3s ease;
+    transform: translate(-50%, 0);
 }
 
 
@@ -2214,25 +2240,12 @@ body.final-24-active .time-box {
         opacity: 0.58;
     }
 
-   #finalWishStar {
-    top: 15%;
-    right: -14px;
-    }
+   
 
-    #finalEdhLogo {
-    top: 14px;
-    right: 14px;
-    width: 52px;
-    }
+   
 
 
-    .final-signature {
-    bottom: 2.5%;
-    width: 58px;
-    height: 58px;
-}
 
-    #finalEdhLogo {
-    width: 42px;
-}
+
+  
 }

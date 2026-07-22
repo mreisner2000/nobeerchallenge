@@ -22,10 +22,22 @@ function setupFinaleButton() {
     return;
   }
 
-  button.addEventListener("click", startCinemaIntro);
+  button.onclick = startCinemaIntro;
 }
 
 function startCinemaIntro() {
+  const finalMusic = document.getElementById("finalMusic");
+
+  if (finalMusic) {
+    finalMusic.pause();
+    finalMusic.currentTime = 0;
+    finalMusic.volume = 0;
+
+    finalMusic.play().catch((error) => {
+      console.warn("Final music could not start:", error);
+    });
+  }
+
   const finished = document.getElementById("finished");
   const cinemaIntro = document.getElementById("cinemaIntro");
   const line1 = document.getElementById("cinemaLine1");
@@ -41,7 +53,7 @@ finished.style.opacity = "0";
     }
 
 setTimeout(() => {
-    finished.classList.add("hidden");
+  finished?.classList.add("hidden");
 }, 1200);
   
 
@@ -133,13 +145,8 @@ requestAnimationFrame(() => {
   }, 1700);
 
   if (finalMusic) {
-    finalMusic.volume = 0;
-
-    finalMusic.play()
-      .then(() => {
-        fadeInFinalMusic(finalMusic, 0.45, 5000);
-      })
-      .catch(() => {});
+  finalMusic.currentTime = 0;
+  fadeInFinalMusic(finalMusic, 0.45, 5000);
   }
 
   if (cinemaIntro) {
