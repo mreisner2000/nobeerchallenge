@@ -146,6 +146,9 @@ requestAnimationFrame(() => {
 
   if (finalMusic) {
   finalMusic.currentTime = 0;
+  finalMusic.volume = 0;
+  finalMusic.muted = false;
+
   fadeInFinalMusic(finalMusic, 0.45, 5000);
   }
 
@@ -170,13 +173,28 @@ requestAnimationFrame(() => {
 }
 
 function fadeInFinalMusic(audio, targetVolume = 0.45, duration = 5000) {
+  const safeTargetVolume = Math.min(
+    Math.max(targetVolume, 0),
+    1
+  );
+
   const startTime = performance.now();
 
   function updateVolume(currentTime) {
-    const elapsed = currentTime - startTime;
-    const progress = Math.min(elapsed / duration, 1);
+    const elapsed = Math.max(
+      0,
+      currentTime - startTime
+    );
 
-    audio.volume = targetVolume * progress;
+    const progress = Math.min(
+      Math.max(elapsed / duration, 0),
+      1
+    );
+
+    audio.volume = Math.min(
+      Math.max(safeTargetVolume * progress, 0),
+      1
+    );
 
     if (progress < 1) {
       requestAnimationFrame(updateVolume);
