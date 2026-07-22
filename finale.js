@@ -1,3 +1,5 @@
+let finaleStarted = false;
+
 function tryShowFinaleExperience() {
   const now = new Date();
   const target = new Date(CONFIG.targetDate);
@@ -26,6 +28,12 @@ function setupFinaleButton() {
 }
 
 function startCinemaIntro() {
+  if (finaleStarted) {
+    return;
+  }
+
+  finaleStarted = true;
+
   const finalMusic = document.getElementById("finalMusic");
 
   if (finalMusic) {
@@ -146,19 +154,12 @@ requestAnimationFrame(() => {
   }, 1700);
 
   if (finalMusic) {
-  finalMusic.pause();
   finalMusic.currentTime = 0;
   finalMusic.volume = 0;
   finalMusic.muted = false;
 
-  finalMusic.play()
-    .then(() => {
-      fadeInFinalMusic(finalMusic, 0.45, 5000);
-    })
-    .catch((error) => {
-      console.warn("Final music could not start:", error);
-    });
-}
+  fadeInFinalMusic(finalMusic, 0.45, 5000);
+  }
 
   if (cinemaIntro) {
     cinemaIntro.style.transition = "opacity 2s ease";
