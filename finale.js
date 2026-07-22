@@ -29,14 +29,15 @@ function startCinemaIntro() {
   const finalMusic = document.getElementById("finalMusic");
 
   if (finalMusic) {
-    finalMusic.pause();
-    finalMusic.currentTime = 0;
-    finalMusic.volume = 0;
+  finalMusic.pause();
+  finalMusic.currentTime = 0;
+  finalMusic.volume = 0;
+  finalMusic.muted = true;
 
-    finalMusic.play().catch((error) => {
-      console.warn("Final music could not start:", error);
-    });
-  }
+  finalMusic.play().catch((error) => {
+    console.warn("Final music could not be unlocked:", error);
+  });
+}
 
   const finished = document.getElementById("finished");
   const cinemaIntro = document.getElementById("cinemaIntro");
@@ -145,12 +146,19 @@ requestAnimationFrame(() => {
   }, 1700);
 
   if (finalMusic) {
+  finalMusic.pause();
   finalMusic.currentTime = 0;
   finalMusic.volume = 0;
   finalMusic.muted = false;
 
-  fadeInFinalMusic(finalMusic, 0.45, 5000);
-  }
+  finalMusic.play()
+    .then(() => {
+      fadeInFinalMusic(finalMusic, 0.45, 5000);
+    })
+    .catch((error) => {
+      console.warn("Final music could not start:", error);
+    });
+}
 
   if (cinemaIntro) {
     cinemaIntro.style.transition = "opacity 2s ease";
