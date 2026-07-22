@@ -227,4 +227,14 @@ requestAnimationFrame(() => {
   setTimeout(() => {
     step4.classList.add("show");
   }, 19500);
+
+  setTimeout(() => {
+    const finalWishStar = document.getElementById("finalWishStar");
+    finalWishStar?.classList.add("glow");
+  }, 23000);
+
+  setTimeout(() => {
+    const finalEdhLogo = document.getElementById("finalEdhLogo");
+    finalEdhLogo?.classList.add("show");
+  }, 26000);
 }

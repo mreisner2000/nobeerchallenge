@@ -242,7 +242,6 @@ function showFinishedScreen(){
 
     finished.classList.remove("hidden");
 
-    launchConfetti();
 
 }
 

@@ -1,9 +1,15 @@
 const CAMPFIRE_MOMENTS = [
     {
-        id: "morning-return",
-        when: (context) => true,
+        id: "final-day",
+        when: (context) => context.daysRemaining <= 1,
         probability: 1,
-        text: "Schön, dass ihr wieder da seid."
+        text: "Heute ist kein normaler Tag."
+    },
+    {
+        id: "last-week",
+        when: (context) => context.lastWeek,
+        probability: 0.45,
+        text: "Das Festival ist schon fast zu hören."
     },
     {
         id: "friday-evening",
@@ -22,19 +28,20 @@ const CAMPFIRE_MOMENTS = [
         when: (context) => context.isSunday && context.isEvening,
         probability: 0.75,
         text: "Der Sonntag verabschiedet sich langsam."
-    },
-    {
-        id: "last-week",
-        when: (context) => context.lastWeek,
-        probability: 0.45,
-        text: "Das Festival ist schon fast zu hören."
-    },
-    {
-        id: "final-day",
-        when: (context) => context.daysRemaining <= 1,
-        probability: 1,
-        text: "Heute ist kein normaler Tag."
     }
+];
+
+const AMBIENT_MESSAGES = [
+    "Schön, dass ihr wieder da seid.",
+    "Wieder ein Stück näher am Ziel.",
+    "Ihr seid noch immer dabei.",
+    "Das Feuer brennt weiter.",
+    "Ein weiterer Tag ist geschafft.",
+    "Langsam wird aus Disziplin eine Geschichte.",
+    "Der Juli zieht weiter. Ihr auch.",
+    "Kein großes Drama. Einfach weitermachen.",
+    "Das Ziel kommt langsam näher.",
+    "Noch immer kein Bier. Noch immer ein Ziel."
 ];
 
 function getCampfireMoment() {
@@ -50,8 +57,12 @@ function getCampfireMoment() {
         }
     }
 
-    return null;
-}
+    const randomIndex = Math.floor(
+        Math.random() * AMBIENT_MESSAGES.length
+    );
+
+    return AMBIENT_MESSAGES[randomIndex];
+}   
 
 function showCampfireMoment(text) {
     const element = document.getElementById("ambientMessage");
@@ -89,3 +100,4 @@ function runCampfireMoment() {
 function tryShowCampfireMoment() {
     return runCampfireMoment();
 }
+

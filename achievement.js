@@ -1,11 +1,11 @@
 const achievements = [
-    { day: 1, id: "day-1", text: "Der erste Schritt" },
-    { day: 3, id: "day-3", text: "Die Routine beginnt" },
-    { day: 7, id: "day-7", text: "Erste Woche geschafft" },
+    { day: 1,  id: "day-1",  text: "Der erste Schritt" },
+    { day: 3,  id: "day-3",  text: "Die Routine beginnt" },
+    { day: 7,  id: "day-7",  text: "Erste Woche geschafft" },
     { day: 10, id: "day-10", text: "Zweistellig" },
     { day: 14, id: "day-14", text: "Halbzeit voraus" },
     { day: 21, id: "day-21", text: "Drei Wochen Disziplin" },
-    { day: 28, id: "day-28", text: "Endspurt erreicht" },
+    { day: 28, id: "day-28", text: "Das Ziel vor Augen" },
     { day: 30, id: "day-30", text: "Nur noch einmal schlafen" }
 ];
 
@@ -44,42 +44,69 @@ function showAchievement(text) {
 }
 
 function getPendingAchievement() {
-  if (!CONFIG.effects.achievements) {
-    return null;
-  }
-
-  const currentDay = getChallengeDay();
-  const story = getStory(currentDay);
-
-  if (story?.achievement) {
-    const storyAchievementKey = `achievement-story-${story.event}`;
-
-    if (!localStorage.getItem(storyAchievementKey)) {
-      return {
-        text: story.achievement,
-        key: storyAchievementKey
-      };
+    if (!CONFIG.effects.achievements) {
+        return null;
     }
-  }
 
-  return achievements.find((achievement) => {
-    const storageKey = `achievement-${achievement.id}`;
+    const currentDay = getChallengeDay();
+    const story = getStory(currentDay);
 
-    return currentDay >= achievement.day && !localStorage.getItem(storageKey);
-  }) || null;
+    if (story?.achievement) {
+        const storyAchievementKey = `achievement-story-${story.event}`;
+
+        if (!localStorage.getItem(storyAchievementKey)) {
+            return {
+                text: story.achievement,
+                key: storyAchievementKey
+            };
+        }
+    }
+
+    const reachedAchievements = achievements.filter((achievement) => {
+        return currentDay >= achievement.day;
+    });
+
+    if (reachedAchievements.length === 0) {
+        return null;
+    }
+
+    const latestAchievement =
+        reachedAchievements[reachedAchievements.length - 1];
+
+    const latestKey = `achievement-${latestAchievement.id}`;
+
+    if (localStorage.getItem(latestKey)) {
+        return null;
+    }
+
+    return {
+        text: latestAchievement.text,
+        key: latestKey,
+        reachedAchievements
+    };
 }
 
 
 function tryShowAchievement() {
-  const achievement = getPendingAchievement();
+    const achievement = getPendingAchievement();
 
-  if (!achievement) {
-    return false;
-  }
+    if (!achievement) {
+        return false;
+    }
 
-  localStorage.setItem(achievement.key, "shown");
-  showAchievement(achievement.text);
+    if (achievement.reachedAchievements) {
+        achievement.reachedAchievements.forEach((item) => {
+            localStorage.setItem(
+                `achievement-${item.id}`,
+                "shown"
+            );
+        });
+    } else {
+        localStorage.setItem(achievement.key, "shown");
+    }
 
-  return true;
+    showAchievement(achievement.text);
+
+    return true;
 }
 
