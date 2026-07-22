@@ -2228,6 +2228,7 @@ body.final-24-active .time-box {
 
     .final-message-stage {
         min-height: 3.1em;
+        transform: translateY(6px);
     }
 
     /* Cinema-Sterne auf Smartphones */
