@@ -2232,7 +2232,7 @@ body.final-24-active .time-box {
     }
 
     .final-signature {
-    bottom: 2%;
+    bottom: 3%;
     }
 
     /* Cinema-Sterne auf Smartphones */
@@ -2250,7 +2250,7 @@ body.final-24-active .time-box {
     }
     
     #finalWishStar {
-        top: -6px;
+        top: -20px;
         left: 50%;
     }
     
