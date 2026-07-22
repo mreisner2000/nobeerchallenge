@@ -2248,7 +2248,8 @@ body.final-24-active .time-box {
     
 
     #finalEdhLogo {
-        width: 48px;
+        width: 56px;
+        bottom: -10px;
     }
 
 }
