@@ -71,17 +71,45 @@ setTimeout(() => {
 }
 
 function startFinalPhotoScene() {
+
+  
   const cinemaIntro = document.getElementById("cinemaIntro");
   const finalPhotoScene = document.getElementById("finalPhotoScene");
   const finalPhoto = document.getElementById("finalPhoto");
   const finalMessage = document.getElementById("finalMessage");
   const finished = document.getElementById("finished");
   const finalMusic = document.getElementById("finalMusic");
+  const finalThanks = document.getElementById("finalThanks");
+  const step2 = document.getElementById("finalMessageStep2");
+  const step3 = document.getElementById("finalMessageStep3");
+  const step4 = document.getElementById("finalMessageStep4");
+
+  finalPhotoScene?.classList.remove("show");
+
+finalPhoto?.classList.remove(
+  "show",
+  "full-color",
+  "ken-burns"
+);
+
+finalMessage?.classList.add("hidden");
+finalMessage?.classList.remove("active");
+
+finalThanks?.classList.remove("show");
+
+[step2, step3, step4].forEach((step) => {
+  if (!step) return;
+
+  step.classList.remove(
+    "show",
+    "fade-out"
+  );
+});
 
   if (finished) {
-  finished.classList.add("hidden");
-  finished.style.opacity = "1";
-}
+    finished.classList.add("hidden");
+    finished.style.opacity = "1";
+  }
 
   if (!finalPhotoScene || !finalPhoto) {
     return;
@@ -89,15 +117,30 @@ function startFinalPhotoScene() {
 
   finalPhotoScene.classList.remove("hidden");
 
-  requestAnimationFrame(() => {
-    finalPhotoScene.classList.add("show");
+// Erzwingt den Ausgangszustand vor der neuen Animation.
+void finalPhotoScene.offsetWidth;
+
+requestAnimationFrame(() => {
+  finalPhotoScene.classList.add("show");
+});
+
+  setTimeout(() => {
     finalPhoto.classList.add("show");
-  });
+  }, 350);
+
+  setTimeout(() => {
+  finalPhoto.classList.add("full-color");
+  }, 1700);
 
   if (finalMusic) {
-  finalMusic.volume = 0.45;
-  finalMusic.play().catch(() => {});
-}
+    finalMusic.volume = 0;
+
+    finalMusic.play()
+      .then(() => {
+        fadeInFinalMusic(finalMusic, 0.45, 5000);
+      })
+      .catch(() => {});
+  }
 
   if (cinemaIntro) {
     cinemaIntro.style.transition = "opacity 2s ease";
@@ -108,10 +151,80 @@ function startFinalPhotoScene() {
     }, 2000);
   }
 
+  setTimeout(() => {
+  finalPhoto.classList.add("ken-burns");
+  }, 5200);
+
   if (finalMessage) {
-    setTimeout(() => {
-      finalMessage.classList.remove("hidden");
-      finalMessage.classList.add("show");
-    }, 4200);
+  setTimeout(() => {
+    startFinalMessageSequence();
+  }, 5600);
   }
+}
+
+function fadeInFinalMusic(audio, targetVolume = 0.45, duration = 5000) {
+  const startTime = performance.now();
+
+  function updateVolume(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    audio.volume = targetVolume * progress;
+
+    if (progress < 1) {
+      requestAnimationFrame(updateVolume);
+    }
+  }
+
+  requestAnimationFrame(updateVolume);
+}
+
+function startFinalMessageSequence() {
+  const finalMessage = document.getElementById("finalMessage");
+  const finalThanks = document.getElementById("finalThanks");
+  const step2 = document.getElementById("finalMessageStep2");
+  const step3 = document.getElementById("finalMessageStep3");
+  const step4 = document.getElementById("finalMessageStep4");
+
+  if (!finalMessage || !finalThanks || !step2 || !step3 || !step4) {
+    return;
+  }
+
+finalMessage.classList.remove("hidden");
+finalMessage.classList.remove("active");
+
+// Browser rendert zuerst den unsichtbaren Ausgangszustand.
+void finalMessage.offsetWidth;
+
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    finalMessage.classList.add("active");
+    finalThanks.classList.add("show");
+  });
+});
+
+  // Schritt 2 erscheint
+  setTimeout(() => {
+    step2.classList.add("show");
+  }, 1700);
+
+  // Schritt 2 blendet nach fünf Sekunden aus
+  setTimeout(() => {
+    step2.classList.add("fade-out");
+  }, 9300);
+
+  // Schritt 3 erscheint
+  setTimeout(() => {
+    step3.classList.add("show");
+  }, 11100);
+
+  // Schritt 3 blendet nach fünf Sekunden aus
+  setTimeout(() => {
+    step3.classList.add("fade-out");
+  }, 17700);
+
+  // Schritt 4 erscheint und bleibt stehen
+  setTimeout(() => {
+    step4.classList.add("show");
+  }, 19500);
 }
