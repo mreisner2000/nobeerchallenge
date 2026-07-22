@@ -2054,11 +2054,15 @@ body.final-24-active .time-box {
 
 .final-message-stage {
     position: relative;
-    min-height: 3.1em;
+    min-height: 5.2em;
 
     display: flex;
     align-items: flex-end;
     justify-content: center;
+
+    transform: translateY(-20px);
+
+    margin-top: 0.55rem;
 }
 
 .final-message-line {
@@ -2142,7 +2146,7 @@ body.final-24-active .time-box {
     z-index: 30;
 
     left: 50%;
-    bottom: calc(2.5% + 6px);
+    bottom: 9%;
 
     width: 72px;
     height: 76px;
@@ -2155,7 +2159,7 @@ body.final-24-active .time-box {
 #finalWishStar {
     position: absolute;
 
-    top: 0;
+    top: 20px;
     left: calc(50% - 2px);
 
     width: 4px;
@@ -2180,7 +2184,7 @@ body.final-24-active .time-box {
     left: 50%;
     bottom: 0;
 
-    width: 54px;
+    width: 72px;
     height: auto;
 
     opacity: 0;
@@ -2240,6 +2244,13 @@ body.final-24-active .time-box {
         opacity: 0.58;
     }
 
+    
+
+    #finalEdhLogo {
+        width: 48px;
+    }
+
+}
    
 
    
