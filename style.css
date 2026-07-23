@@ -2250,17 +2250,20 @@ body.final-24-active .time-box {
     }
     
   #finalWishStar {
-    top: -6px;
+    top: 4px;
     left: 50%;
 
-    width: 5px;
-    height: 5px;
-}
-    
+    width: 6px;
+    height: 6px;
 
-    #finalEdhLogo {
-        width: 62px;
-    }
+    z-index: 2;
+    transform: translateX(-50%) scale(0.3);
+}
+
+#finalEdhLogo {
+    width: 62px;
+    z-index: 1;
+}
 
 }
    
