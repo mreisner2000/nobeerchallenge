@@ -2250,7 +2250,7 @@ body.final-24-active .time-box {
     }
     
   #finalWishStar {
-    top: 0;
+    top: -6px;
     left: 50%;
 
     width: 5px;
